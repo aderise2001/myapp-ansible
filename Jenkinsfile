@@ -3,9 +3,20 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                docker image 'maven:3.3.3'
-                sh 'mvn --version'
-            }
+                timeout(time: 2, unit: 'MINUTES'){
+                    retry(5){
+                        sh "echo $PATH"
+                    }
+                }
+            }   
+        }
+    }
+    post('Post Result') {
+        success {
+            echo 'This will run only if successful'
+        }
+        failure {
+            echo 'This will run only if failure'
         }
     }
 }
