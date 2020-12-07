@@ -1,5 +1,7 @@
 pipeline {
     agent any
+    environment {
+        EMAIL_TO: 'aderise2012@gmail.com'
     stages {
         stage('build') {
             steps {
@@ -14,9 +16,10 @@ pipeline {
     }
     post('Post Result') {
         success {
-            mail to: 'aderise2012@gmail.com',
-                 subject: "Successful pipeline: ${currentBuild.fullDisplayName}",
-                 body: "Some is right with: ${env.BUILD_URL} @here ${env.JOB_NAME} #${env.BUILD_NUMBER} has passed"
+           emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+                    to: "${EMAIL_TO}", 
+                    subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+        }
             echo 'This will run only if successful'
         }
         failure {
