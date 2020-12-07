@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        EMAIL_TO: 'aderise2012@gmail.com'
+        EMAIL_TO = 'aderise2012@gmail.com'
     stages {
         stage('build') {
             steps {
