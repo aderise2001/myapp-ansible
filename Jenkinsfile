@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker {image 'ruby:2.3'}
+    }
     environment {
         EMAIL_TO = 'aderise2012@gmail.com'
     }
