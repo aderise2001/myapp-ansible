@@ -17,7 +17,7 @@ pipeline {
     }
     post('Post Result') {
         success {
-            echo 'Message: Started: Job - ${env.JOB_NAME} ${env.BUILD_NAME} ${env.BUILD_URL}
+            echo 'Message: Started: Job - ${env.JOB_NAME} ${env.BUILD_NAME} ${env.BUILD_URL}'
             echo 'This will run only if successful'
         }
         failure {
